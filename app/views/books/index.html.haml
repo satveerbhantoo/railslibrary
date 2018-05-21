@@ -1,0 +1,53 @@
+%nav.navbar.navbar-expand-sm.bg-light
+    %ul.navbar-nav
+        %li.nav-item
+            Books 
+        - if current_user
+            %li.nav-item.active
+                logged in as #{current_user.email}
+            %li.nav-item 
+                = link_to "Log out", destroy_user_session_path, method: :delete, :class =>"nav-link"
+        -else  
+            %li.nav-item
+                =link_to "Sign In", new_user_session_path, :class =>"nav-link"
+            %li.nav-item
+                =link_to "Sign Up", new_user_session_path, :class =>"nav-link"
+%div
+    -# =form_tag("books", method: "get") do
+    -#     = label_tag(:keywords, "Search for:")
+    -#     -if @is_mine
+    -#         = hidden_field_tag(:is_mine, true)
+    -#     = text_field_tag(:keywords)
+    -#     = submit_tag("Search")
+    
+    
+    =form_with url: '/books', method: :get, local: true do |f|
+        =f.label :keywords, "Search"
+        =f.text_field :keywords, id: :keywords, :value => @keywords
+        %div.field 
+            =f.label :book 
+            %br 
+            =f.collection_select(:library_id, @libraries, :id, :name, :include_blank => "Select Library", :selected=> @current_library)
+        -if @is_mine 
+            =hidden_field_tag(:is_mine, true)
+        =f.submit "Submit"
+
+%table
+    %tr
+        %th Book title 
+        %th Book synopsis 
+        %th Publisher 
+        %th published date 
+        %th Actions
+    - @books.each do |book|
+        %tr 
+            %td= book.name 
+            %td= book.synopsis 
+            %td= book.publisher 
+            %td= book.published_date 
+            -if @is_mine
+                %td= link_to 'Return book', book_return_path(book) , method: :patch
+            -else
+                %td= link_to 'View', book_path(book)
+            
+= link_to 'Back', home_index_path

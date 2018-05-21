@@ -1,0 +1,27 @@
+%h1 Book details
+
+%img.book_cover{:src => @book.img_url}
+%p 
+    %strong Book title 
+    #{@book.name}
+
+%p
+    %strong Synopsis 
+    #{@book.synopsis}
+
+%p
+    %strong Date published 
+    #{@book.published_date}
+
+%p
+    %strong Publisher
+    #{@book.publisher}
+
+
+-if @book.is_borrowed == true
+    -if @book.user_id = current_user.id
+        = link_to 'return book', book_return_path(@book.id), method: :patch
+    -else
+        This book is not available. It is borrowed by another user.
+-else 
+    = link_to 'Borrow', book_borrow_path(@book.id), method: :patch

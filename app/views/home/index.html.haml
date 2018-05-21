@@ -1,0 +1,33 @@
+%nav.navbar.navbar-expand-sm.bg-light
+    %ul.navbar-nav
+        %li.nav-item
+            Home
+        - if current_user
+            %span.clear-fix
+                %li.nav-item.float-right
+                    logged in as #{current_user.email}
+                %li.nav-item.float-right
+                    = link_to "Log out", destroy_user_session_path, method: :delete, :class =>"nav-link"
+        -else  
+            %li.nav-item
+                =link_to "Sign In", new_user_session_path, :class =>"nav-link"
+            %li.nav-item
+                =link_to "Sign Up", new_user_session_path, :class =>"nav-link"
+
+
+
+%div.container
+    %div.row
+        %div.col-sm-4
+        %div.col-sm-4 
+            %div.card.bg-primary.text-white.border.border-0
+                %div.card-header
+                    Main menu
+                %div.card-body.bg-light
+                    %div.list-group 
+                        =link_to "Borrow books" , books_path, :class=>"list-group-item list-group-item-action"
+
+                        =link_to "Return a book" , books_path(:is_mine => true), :class=>"list-group-item list-group-item-action"
+
+                        =link_to "View my logs" , logs_path, :class=>"list-group-item list-group-item-action"
+        %div.col-sm-4

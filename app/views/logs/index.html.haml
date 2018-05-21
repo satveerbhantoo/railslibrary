@@ -1,0 +1,14 @@
+%h1 All logs
+%table
+    %tr
+        %th Log type
+        %th Log details
+        %th Date 
+        %th Book name
+    - @logs.each do |log|
+        %tr 
+            %td= log.log_type 
+            %td= log.log_details 
+            %td= log.date_added   
+            %td= log.book.name
+= link_to 'Back', home_index_path
