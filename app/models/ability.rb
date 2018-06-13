@@ -8,5 +8,6 @@ class Ability
       if user.is_admin?
         can :manage, :all  
       end
+    end
   end
 end
