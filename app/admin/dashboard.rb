@@ -19,6 +19,7 @@ ActiveAdmin.register_page "Dashboard" do
   end
   
   controller do
+    #authorize! :delete, :book
     require 'sendgrid-ruby'
     include SendGrid
     def notify_users

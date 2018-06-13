@@ -4,4 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable, :registerable
   has_many :books
+
+  def active_for_authentication? 
+    super && is_active?
+  end
 end

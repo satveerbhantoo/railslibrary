@@ -31,7 +31,7 @@ class BooksController < ApplicationController
             @books = @books.where({library_id: params[:library_id]}) 
             
         end
-
+    
         
     end
 

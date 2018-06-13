@@ -40,7 +40,9 @@ gem 'sendgrid-ruby'
 gem "daemons"
 gem 'sidekiq'
 gem "haml"
+gem 'has_secure_token'
 
+gem 'cancancan', '~> 2.0'
 
 group :development, :test do
   gem 'sqlite3'

@@ -12,42 +12,34 @@
                 =link_to "Sign In", new_user_session_path, :class =>"nav-link"
             %li.nav-item
                 =link_to "Sign Up", new_user_session_path, :class =>"nav-link"
-%div
-    -# =form_tag("books", method: "get") do
-    -#     = label_tag(:keywords, "Search for:")
-    -#     -if @is_mine
-    -#         = hidden_field_tag(:is_mine, true)
-    -#     = text_field_tag(:keywords)
-    -#     = submit_tag("Search")
-    
-    
-    =form_with url: '/books', method: :get, local: true do |f|
-        =f.label :keywords, "Search"
-        =f.text_field :keywords, id: :keywords, :value => @keywords
-        %div.field 
-            =f.label :book 
-            %br 
-            =f.collection_select(:library_id, @libraries, :id, :name, :include_blank => "Select Library", :selected=> @current_library)
-        -if @is_mine 
-            =hidden_field_tag(:is_mine, true)
-        =f.submit "Submit"
+        
+%div.container{:style => 'margin-top: 10px;'} 
 
-%table
-    %tr
-        %th Book title 
-        %th Book synopsis 
-        %th Publisher 
-        %th published date 
-        %th Actions
-    - @books.each do |book|
-        %tr 
-            %td= book.name 
-            %td= book.synopsis 
-            %td= book.publisher 
-            %td= book.published_date 
-            -if @is_mine
-                %td= link_to 'Return book', book_return_path(book) , method: :patch
-            -else
-                %td= link_to 'View', book_path(book)
-            
-= link_to 'Back', home_index_path
+    %div
+        =form_with url: '/books', method: :get, local: true do |f|
+            %div.form-group
+                =f.text_field :keywords, id: :keywords, :value => @keywords, :class => 'form-control', :placeholder => 'Search book'
+            %div.field 
+                =f.label :book 
+                %br 
+                =f.collection_select(:library_id, @libraries, :id, :name, :include_blank => "Select Library", :selected=> @current_library, :class => 'form-control')
+            -if @is_mine 
+                =hidden_field_tag(:is_mine, true)
+            =f.submit "Submit", :class => 'btn, btn-primary'
+    %h3 Books
+    %div.row 
+        - @books.each do |book|
+            %div.col-sm-3
+                %div.card
+                    %img.card-img-top{:src => book.img_url, :style=> "width:100%"}
+                    %div.card-body
+                        %h4.card-title
+                            =book.name
+                        %p.card-text
+                            =book.synopsis
+                        -if @is_mine
+                            = link_to 'Return book', book_return_path(book) , method: :patch, :class=> "btn btn-primary btn-block"
+                        -else
+                            = link_to 'View', book_path(book), :class=> "btn btn-default btn-block"
+
+    = link_to 'Back', home_index_path, :class=>'btn btn-default'
