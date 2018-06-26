@@ -1,21 +1,3 @@
-%nav.navbar.navbar-expand-sm.bg-light
-    %ul.navbar-nav
-        %li.nav-item
-            Home
-        - if current_user
-            %span.clear-fix
-                %li.nav-item.float-right
-                    logged in as #{current_user.email}
-                %li.nav-item.float-right
-                    = link_to "Log out", destroy_user_session_path, method: :delete, :class =>"nav-link"
-        -else  
-            %li.nav-item
-                =link_to "Sign In", new_user_session_path, :class =>"nav-link"
-            %li.nav-item
-                =link_to "Sign Up", new_user_session_path, :class =>"nav-link"
-
-
-
 %div.container
     %div.row
         %div.col-sm-4

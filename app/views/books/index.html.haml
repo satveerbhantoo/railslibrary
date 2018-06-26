@@ -1,18 +1,4 @@
-%nav.navbar.navbar-expand-sm.bg-light
-    %ul.navbar-nav
-        %li.nav-item
-            Books 
-        - if current_user
-            %li.nav-item.active
-                logged in as #{current_user.email}
-            %li.nav-item 
-                = link_to "Log out", destroy_user_session_path, method: :delete, :class =>"nav-link"
-        -else  
-            %li.nav-item
-                =link_to "Sign In", new_user_session_path, :class =>"nav-link"
-            %li.nav-item
-                =link_to "Sign Up", new_user_session_path, :class =>"nav-link"
-        
+= will_paginate @books  
 %div.container{:style => 'margin-top: 10px;'} 
 
     %div
@@ -30,7 +16,7 @@
     %div.row 
         - @books.each do |book|
             %div.col-sm-3
-                %div.card
+                %div.card.card-max-height
                     %img.card-img-top{:src => book.img_url, :style=> "width:100%"}
                     %div.card-body
                         %h4.card-title
@@ -41,5 +27,5 @@
                             = link_to 'Return book', book_return_path(book) , method: :patch, :class=> "btn btn-primary btn-block"
                         -else
                             = link_to 'View', book_path(book), :class=> "btn btn-default btn-block"
-
+    = will_paginate @books
     = link_to 'Back', home_index_path, :class=>'btn btn-default'

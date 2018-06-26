@@ -42,7 +42,17 @@ gem 'sidekiq'
 gem "haml"
 gem 'has_secure_token'
 
+gem 'delayed_job_active_record'
+
 gem 'cancancan', '~> 2.0'
+
+##Print tools
+gem 'pry'
+gem 'hirb'
+gem 'irbtools'
+
+##pagination
+gem 'will_paginate', '~> 3.0'
 
 group :development, :test do
   gem 'sqlite3'

@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+.btn-corrected{
+    color: #FFF !important;
+    text-decoration: none !important;
+}
+
+.card-max-height{
+    height: 362px;
+    margin-bottom: 4px;
+}

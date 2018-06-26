@@ -1,6 +1,6 @@
 class BaseApiController < ApplicationController
 
-    #before_action :parse_request, :authenticate_user_from_token!
+    ##before_action :parse_request, :authenticate_user_from_token!
 
     private 
         def authenticate_user_from_token!
@@ -20,6 +20,6 @@ class BaseApiController < ApplicationController
             puts "request body start"
             puts request.body.read
             puts "request body end"
-            @json = JSON.parse(request.body.read)
+            @json = JSON.parse(request.body)
         end
 end

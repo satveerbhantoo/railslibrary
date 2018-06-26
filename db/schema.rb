@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180522081421) do
+ActiveRecord::Schema.define(version: 20180620115251) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20180522081421) do
     t.string "publisher"
     t.date "published_date"
     t.string "img_url"
-    t.boolean "is_borrowed"
+    t.boolean "is_borrowed", default: false
     t.date "date_borrowed"
     t.integer "library_id"
     t.integer "user_id"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20180522081421) do
     t.integer "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["book_id"], name: "index_comments_on_book_id"
   end
 

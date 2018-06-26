@@ -14,4 +14,18 @@
             :integrity => "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl",
             :crossorigin => "anonymous"}
   %body
+    %nav.navbar.navbar-expand-sm.bg-light
+      %ul.navbar-nav
+        %li.nav-item
+          Books 
+        - if current_user
+          %li.nav-item.active
+            logged in as #{current_user.email}
+          %li.nav-item 
+            = link_to "Log out", destroy_user_session_path, method: :delete, :class =>"nav-link"
+        -else  
+          %li.nav-item
+            =link_to "Sign In", new_user_session_path, :class =>"nav-link"
+          %li.nav-item
+            =link_to "Sign Up", new_user_session_path, :class =>"nav-link"
     = yield

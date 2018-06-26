@@ -1,0 +1,11 @@
+=form_for :comment, url: comments_path, local: true do |f|
+    %div.row 
+        %div.col-md-8
+            %div.form-group
+                =f.hidden_field(:book_id, :value => @book.id)
+                =f.text_area 'comment_body', class: 'form-control'
+                -# %textarea.form-control{:rows=> '5', :id => 'comment', :placeholder => 'Enter comment here!'}
+        %div.col-md-4
+            -# %a.btn.btn-success.btn-block.btn-corrected
+            -#     Submit
+            =submit_tag 'Submit', class: 'btn btn-sucess btn-corrected'

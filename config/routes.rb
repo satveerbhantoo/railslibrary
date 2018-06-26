@@ -17,10 +17,14 @@ Rails.application.routes.draw do
   
 
   post 'books/search' => "books#search", as: "books_search"
+  post 'books/create_comment' => "books#create_comment" , as: "comment_create"
+  
+  resources :comments
 
   resources :books do
     patch '/borrow', action: :borrow
     patch '/return', action: :return
+    post '/comment', action: :comment
   end
 
   resources :logs
@@ -31,7 +35,7 @@ Rails.application.routes.draw do
       scope 'books' do 
         get '/' => 'api_books#index'
         post '/create' => 'api_books#create'
-        delete '/destroy' => 'api_books#delete'
+        delete '/destroy' => 'api_books#destroy'
         scope '/:id' do
           get '/' => 'api_books#show'
         end

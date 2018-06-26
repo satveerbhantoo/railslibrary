@@ -12,7 +12,7 @@ module Libv3
     config.load_defaults 5.1
 
     #Delayed job gem 
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :delayed_job
 
 
     # Settings in config/environments/* take precedence over those specified here.

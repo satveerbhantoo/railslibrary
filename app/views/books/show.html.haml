@@ -1,27 +1,45 @@
-%h1 Book details
+%div.container{:style => 'margin-top: 10px;'} 
+    %div.row 
+        %div.col-md-3
+            %img.book_cover{:src => @book.img_url}
 
-%img.book_cover{:src => @book.img_url}
-%p 
-    %strong Book title 
-    #{@book.name}
+        %div.col-md-5
+            %p 
+                %strong Book title 
+                #{@book.name}
 
-%p
-    %strong Synopsis 
-    #{@book.synopsis}
+            %p
+                %strong Synopsis 
+                #{@book.synopsis}
 
-%p
-    %strong Date published 
-    #{@book.published_date}
+            %p
+                %strong Date published 
+                #{@book.published_date}
 
-%p
-    %strong Publisher
-    #{@book.publisher}
+            %p
+                %strong Publisher
+                #{@book.publisher}
+        %div.col-md-4
+            %h5
+                Comments
+
+            %div.card.bg-light.text-dark
+                %div.card-body 
+                =render "comments/show"
+                    
+    =render "comments/new"
 
 
--if @book.is_borrowed == true
-    -if @book.user_id = current_user.id
-        = link_to 'return book', book_return_path(@book.id), method: :patch
-    -else
-        This book is not available. It is borrowed by another user.
--else 
-    = link_to 'Borrow', book_borrow_path(@book.id), method: :patch
+            
+    %br
+    %div.row.clearfix
+        %div.col-md-12
+            -if @book.is_borrowed == true
+                -if @book.user_id = current_user.id
+                    = link_to 'Return book', book_return_path(@book.id), method: :patch, class: 'btn btn-success btn-block btn-corrected'
+                -else
+                    This book is not available. It is borrowed by another user.
+            -else 
+                = link_to 'Borrow', book_borrow_path(@book.id), method: :patch, class: 'btn btn-success btn-block btn-corrected'
+
+            = link_to 'Back', books_path, class: 'btn btn-success btn-block btn-corrected'
