@@ -8,8 +8,8 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '996dd5c62398731e058f626b616406f03485a128980fe6f932ba7fdc41ba2a1b309ee65f6d5f4b225cee1c48a600b09640881e4a88ac6588d63972af1e4d0a05'
-  
+  config.secret_key = 'b4c271cd089f64b3b3bf5eda5900fbf2962cb1c46cb1e086b55cb43aa5ace5af03555d074c96bfe8b37afafae1cb8721c169fb3e4b4c8b1c7f270840c8f9cf6f'
+
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -149,7 +149,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  # config.remember_for = 2.weeksco
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true

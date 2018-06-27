@@ -11,10 +11,12 @@ module Api
 
             params[:books].each do |book|
                 params2 = ActionController::Parameters.new({
-                    book => book
+                    :book => book
                 })  
-
-                puts params2
+                
+                permitted = params2.require(:book).permit(:name, :synopsis, :publisher, :published_date, :library_id)
+                puts permitted.permitted?
+                # Book.new(params2).save
                 
                 # permitted = params2.require(:book).permit(:name, :synopsis, :publisher)
                 # puts 'permitted: ?'
