@@ -16,6 +16,8 @@ module Api
                 
                 permitted = params2.require(:book).permit(:name, :synopsis, :publisher, :published_date, :library_id)
                 puts permitted.permitted?
+
+                Book.new(permitted).save
                 # Book.new(params2).save
                 
                 # permitted = params2.require(:book).permit(:name, :synopsis, :publisher)

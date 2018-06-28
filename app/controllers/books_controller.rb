@@ -27,7 +27,7 @@ class BooksController < ApplicationController
             @books = @books.where({library_id: params[:library_id]}) 
         end
 
-        @books = @books.paginate(page: params[:page], per_page: 4)
+        # @books = @books.paginate(page: params[:page], per_page: 4)
      
     end
 

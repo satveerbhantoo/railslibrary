@@ -52,7 +52,9 @@ gem 'cancancan', '~> 2.0'
 # gem 'irbtools'
 
 ##pagination
-gem 'will_paginate', '~> 3.0'
+# gem 'will_paginate', '~> 3.0'
+
+gem 'simple_form'
 
 group :development, :test do
   gem 'sqlite3'

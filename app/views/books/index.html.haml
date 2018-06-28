@@ -1,4 +1,3 @@
-= will_paginate @books  
 %div.container{:style => 'margin-top: 10px;'} 
 
     %div
@@ -27,5 +26,4 @@
                             = link_to 'Return book', book_return_path(book) , method: :patch, :class=> "btn btn-primary btn-block"
                         -else
                             = link_to 'View', book_path(book), :class=> "btn btn-default btn-block"
-    = will_paginate @books
     = link_to 'Back', home_index_path, :class=>'btn btn-default'
