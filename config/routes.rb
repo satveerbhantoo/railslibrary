@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-
+  # mount_devise_token_auth_for 'User', at: 'auth'
+  post 'auth_user' => 'authentication#authenticate_user'
   devise_scope :user do
     get "sign_up" => "devise/registrations#new" , as: "new_user_registration"
   end
@@ -32,7 +33,9 @@ Rails.application.routes.draw do
   #API Definition
   namespace :api do
     scope 'v1' do 
+      
       scope 'books' do 
+        
         get '/' => 'api_books#index'
         post '/create' => 'api_books#create'
         delete '/destroy' => 'api_books#destroy'

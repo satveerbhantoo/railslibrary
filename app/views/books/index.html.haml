@@ -8,7 +8,7 @@
                 =f.label :book 
                 %br 
                 =f.collection_select(:library_id, @libraries, :id, :name, :include_blank => "Select Library", :selected=> @current_library, :class => 'form-control')
-            -if @is_mine 
+            -if @is_mine == 'true' 
                 =hidden_field_tag(:is_mine, true)
             =f.submit "Submit", :class => 'btn, btn-primary'
     %h3 Books

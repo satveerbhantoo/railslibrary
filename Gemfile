@@ -28,6 +28,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
+gem 'simple_command'
+gem 'devise_token_auth'
+# gem 'omniauth-github'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -46,7 +50,7 @@ gem 'delayed_job_active_record'
 
 gem 'cancancan', '~> 2.0'
 gem 'kaminari'
-
+gem 'dotenv-rails', groups: [:development, :test]
 ##Print tools
 # gem 'pry'
 # gem 'hirb'

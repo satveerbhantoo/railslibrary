@@ -1,6 +1,8 @@
 module Api
     class ApiBooksController < BaseApiController
-        skip_before_action :verify_authenticity_token
+        before_action :authenticate_request!
+        protect_from_forgery unless: -> { request.format.json? }
+        skip_before_filter :verify_authenticity_token 
 
         def index 
             render json: Book.limit(10) ##
@@ -18,21 +20,7 @@ module Api
                 puts permitted.permitted?
 
                 Book.new(permitted).save
-                # Book.new(params2).save
-                
-                # permitted = params2.require(:book).permit(:name, :synopsis, :publisher)
-                # puts 'permitted: ?'
-                # puts permitted
             end
-
-            # book.name = params[:name]
-            # book.synopsis = params[:synopsis]
-            # book.publisher = params[:publisher]
-            # book.published_date = params[:published_date]
-            # book.library_id = params[:library_id]
-            # puts 'End params'
-            #saving
-            # book.save
         end
 
         def show

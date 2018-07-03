@@ -11,7 +11,7 @@ class BooksController < ApplicationController
         if !params[:is_mine].blank?
             @books = Book.where(user_id: current_user.id)
         else 
-            @books = Book.where(is_borrowed: false)
+            @books = Book.unborrowed
         end 
         
         #Check whether Must search or not?
@@ -63,5 +63,6 @@ class BooksController < ApplicationController
         Log.new(book_id: @book.id, log_details: "Book was returned by user", log_type: "user_returned_book", date_added: DateTime.now, user_id: current_user.id).save
         redirect_to request.referrer, notice: "You're being redirected"
     end
+    
 
 end
