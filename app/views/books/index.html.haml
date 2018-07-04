@@ -5,11 +5,16 @@
             %div.form-group
                 =f.text_field :keywords, id: :keywords, :value => @keywords, :class => 'form-control', :placeholder => 'Search book'
             %div.field 
-                =f.label :book 
                 %br 
                 =f.collection_select(:library_id, @libraries, :id, :name, :include_blank => "Select Library", :selected=> @current_library, :class => 'form-control')
-            -if @is_mine 
+                %br
+                =f.label :book, :categories
+                %br 
+                
+                =f.collection_select(:categories_id, @categories, :id, :name, {:prompt => "Please Select a Sector", :selected => []}, {:multiple => true})
+            -if @is_mine
                 =hidden_field_tag(:is_mine, true)
+
             =f.submit "Submit", :class => 'btn, btn-primary'
     %h3 Books
     %div.row 
@@ -22,6 +27,9 @@
                             =book.name
                         %p.card-text
                             =book.synopsis
+                        -book.book_categories.each do |cat|
+                            =cat.category.name
+                            %br
                         -if @is_mine
                             = link_to 'Return book', book_return_path(book) , method: :patch, :class=> "btn btn-primary btn-block"
                         -else
