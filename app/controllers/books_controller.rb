@@ -6,12 +6,15 @@ class BooksController < ApplicationController
     def index
         ##retrieve list of libraries available for dropdown
         @libraries = fetch_libraries
+        @book_categories = fetch_categories 
 
         ##Verify if viewing borrowed book or genral listing
         if !params[:is_mine].blank?
             @books = Book.where(user_id: current_user.id)
+            @is_mine = true
         else 
-            @books = Book.unborrowed
+            @books = Book.where(is_borrowed: false).includes(:categories).limit(20)
+            @is_mine = false
         end 
         
         #Check whether Must search or not?
@@ -20,10 +23,16 @@ class BooksController < ApplicationController
             @books = @books.where("name like ?", '%'+ params[:keywords]+ '%')
         end
 
+        if params[:categories_id] != nil 
+            puts 'categoryids'
+            puts params[:categories_id]
+        end
+
         #Filtering by libraries
         puts 'Filter by libraries'
         if !params[:library_id].blank?
             puts 'inside library filter'
+            @current_library = params[:library_id]
             @books = @books.where({library_id: params[:library_id]}) 
         end
 
@@ -37,6 +46,14 @@ class BooksController < ApplicationController
         Library.limit(10)
     end
 
+    #fetch book categories
+    def fetch_categories
+        p 'fetching categories'
+        @categories = Category.limit(100)
+        p 'categories fetched'
+        p @categories
+    end
+
     def show
         @book = Book.find(params[:id])
         @comments = Comment.where(book_id: params[:id]).includes(:user) 
@@ -48,8 +65,6 @@ class BooksController < ApplicationController
         @book.is_borrowed =  true
         @book.user = current_user
         @book.save
-        Log.new(book_id: @book.id, log_details: "Book was borrowed by user", log_type: "user_borrowed_book", date_added: DateTime.now, user_id: current_user.id).save
-        UserNotifierMailer.delay.send_notification current_user, @book
         redirect_to request.referrer, notice: "You're being redirected"
         #Todo: Update user log   
     end
@@ -60,7 +75,6 @@ class BooksController < ApplicationController
         @book.is_borrowed = false
         @book.user = nil
         @book.save
-        Log.new(book_id: @book.id, log_details: "Book was returned by user", log_type: "user_returned_book", date_added: DateTime.now, user_id: current_user.id).save
         redirect_to request.referrer, notice: "You're being redirected"
     end
     
