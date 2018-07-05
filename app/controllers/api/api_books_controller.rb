@@ -2,7 +2,7 @@ module Api
     class ApiBooksController < BaseApiController
         before_action :authenticate_request!
         protect_from_forgery unless: -> { request.format.json? }
-        skip_before_filter :verify_authenticity_token 
+        # skip_before_filter :verify_authenticity_token 
 
         def index 
             render json: Book.limit(10) ##
