@@ -23,9 +23,13 @@ class BooksController < ApplicationController
             @books = @books.where("name like ?", '%'+ params[:keywords]+ '%')
         end
 
+
+
         if params[:categories_id] != nil 
-            puts 'categoryids'
-            puts params[:categories_id]
+            # params[:categories_id].shift
+            puts params[:categories_id].size
+            @books = Book.includes(:categories).where(categories: {id: params[:categories_id]})
+            # @books = @books.where({categories: params[:categories_id]})
         end
 
         #Filtering by libraries
