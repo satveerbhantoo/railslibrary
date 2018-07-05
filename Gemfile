@@ -63,6 +63,7 @@ gem 'simple_form'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'irbtools'
 end
 
 group :production do
