@@ -13,7 +13,7 @@ class BooksController < ApplicationController
             @books = Book.where(user_id: current_user.id)
             @is_mine = true
         else 
-            @books = Book.where(is_borrowed: false).includes(:categories).limit(20)
+            @books = Book.where(is_borrowed: false).includes(:book_categories).limit(20)
             @is_mine = false
         end 
         
