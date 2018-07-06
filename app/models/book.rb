@@ -26,7 +26,7 @@ class Book < ApplicationRecord
     end
 
     def send_mail
-        if self.is_brrowed? 
+        if self.is_borrowed? 
             UserNotifierMailer.delay.send_notification self.user, self
         end
     end
