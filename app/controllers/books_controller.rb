@@ -13,7 +13,7 @@ class BooksController < ApplicationController
             @books = Book.where(user_id: current_user.id)
             @is_mine = true
         else 
-            @books = Book.where(is_borrowed: false).includes(:book_categories).limit(20)
+            @books = Book.where(is_borrowed: false).includes(:categories, :book_categories).limit(20)
             @is_mine = false
         end 
         
@@ -28,6 +28,7 @@ class BooksController < ApplicationController
         if params[:categories_id] != nil 
             # params[:categories_id].shift
             puts params[:categories_id].size
+            @selected_categories = params[:categories_id]
             @books = Book.includes(:categories).where(categories: {id: params[:categories_id]})
             # @books = @books.where({categories: params[:categories_id]})
         end

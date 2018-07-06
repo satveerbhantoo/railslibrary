@@ -55,10 +55,16 @@ GEM
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (8.0.0)
+    autoprefixer-rails (8.6.2)
+      execjs
     aws_cf_signer (0.1.3)
     bcrypt (3.1.11)
     bindex (0.5.0)
     binding.repl (3.0.0)
+    bootstrap (4.1.1)
+      autoprefixer-rails (>= 6.0.3)
+      popper_js (>= 1.12.9, < 2)
+      sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (2.2.0)
@@ -231,6 +237,7 @@ GEM
     pg (1.0.0)
     polyamorous (1.3.3)
       activerecord (>= 3.0)
+    popper_js (1.12.9)
     public_suffix (3.0.2)
     puma (3.11.4)
     rack (2.0.5)
@@ -370,6 +377,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   bcrypt (~> 3.1.7)
+  bootstrap
   byebug
   cancancan (~> 2.0)
   capybara (~> 2.13)
@@ -385,6 +393,7 @@ DEPENDENCIES
   has_secure_token
   irbtools
   jbuilder (~> 2.5)
+  jquery-rails
   jwt
   kaminari
   listen (>= 3.0.5, < 3.2)

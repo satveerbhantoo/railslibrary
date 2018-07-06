@@ -11,7 +11,7 @@
                 =f.label :book, :categories
                 %br 
                 
-                =f.collection_select(:categories_id, @categories, :id, :name, {:prompt => "Please Select a Sector", :selected => []}, {:multiple => true})
+                =f.collection_select(:categories_id, @categories, :id, :name, {:prompt => "Please Select a Sector", :selected => @selected_categories}, {:multiple => true})
             -if @is_mine
                 =hidden_field_tag(:is_mine, true)
 

@@ -35,7 +35,8 @@ gem 'devise_token_auth'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'bootstrap'
+gem 'jquery-rails'
 gem "haml-rails", "~> 1.0"
 gem 'activeadmin'
 gem 'devise'
