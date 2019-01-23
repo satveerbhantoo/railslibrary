@@ -13,24 +13,14 @@ class BooksController < ApplicationController
             @books = Book.where(user_id: current_user.id)
             @is_mine = true
         else 
-            @books = Book.where(is_borrowed: false).includes(:categories, :book_categories).limit(20)
+            @books = Book.where(is_borrowed: false).includes(:book_categories,:categories)
             @is_mine = false
         end 
         
         #Check whether Must search or not?
         if params[:keywords] != nil
             @keywords = params[:keywords]
-            @books = @books.where("name like ?", '%'+ params[:keywords]+ '%')
-        end
-
-
-
-        if params[:categories_id] != nil 
-            # params[:categories_id].shift
-            puts params[:categories_id].size
-            @selected_categories = params[:categories_id]
-            @books = Book.includes(:categories).where(categories: {id: params[:categories_id]})
-            # @books = @books.where({categories: params[:categories_id]})
+            @books = @books.where("books.name like ?", '%'+ params[:keywords]+ '%')
         end
 
         #Filtering by libraries
@@ -40,6 +30,16 @@ class BooksController < ApplicationController
             @current_library = params[:library_id]
             @books = @books.where({library_id: params[:library_id]}) 
         end
+
+        if params[:categories_id] != nil 
+            # params[:categories_id].shift
+            puts params[:categories_id].size
+            @selected_categories = params[:categories_id]
+            @books = @books.where(categories: {id: params[:categories_id]}).limit(20)
+            # @books = @books.where({categories: params[:categories_id]})
+        end
+
+
 
         # @books = @books.paginate(page: params[:page], per_page: 4)
      
